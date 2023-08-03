@@ -29,6 +29,10 @@ class Comment
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $photoFile = null;
 
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Boardgame $boardgame = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -90,6 +94,18 @@ class Comment
     public function setPhotoFile(?string $photoFile): self
     {
         $this->photoFile = $photoFile;
+
+        return $this;
+    }
+
+    public function getBoardgame(): ?Boardgame
+    {
+        return $this->boardgame;
+    }
+
+    public function setBoardgame(?Boardgame $boardgame): self
+    {
+        $this->boardgame = $boardgame;
 
         return $this;
     }
