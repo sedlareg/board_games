@@ -9,6 +9,7 @@ use App\Repository\BoardgameRepository;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -33,14 +34,25 @@ class BoardgameController extends AbstractController
 
     //#[Route('/boardgame/{id}', name: 'boardgame')]
     #[Route('/boardgame/{slug}', name: 'boardgame')]
-    public function show(Request $request, Boardgame $boardgame, CommentRepository $commentRepository): Response
-    {
+    public function show(
+        Request $request,
+        Boardgame $boardgame,
+        CommentRepository $commentRepository,
+        #[Autowire('%photo_dir%')] string $photoDir,
+    ): Response {
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setBoardgame($boardgame);
+
+            if ($photo = $form['photo']->getData()) {
+                $filename = bin2hex(random_bytes(6)).'.'.$photo->guessExtension();
+                $photo->move($photoDir, $filename);
+                $comment->setPhotoFile($filename);
+            }
+
             $this->entityManager->persist($comment);
             $this->entityManager->flush();
 
