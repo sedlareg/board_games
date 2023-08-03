@@ -6,6 +6,7 @@ use App\Entity\Boardgame;
 use App\Repository\BoardgameRepository;
 use App\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
@@ -24,11 +25,16 @@ class BoardgameController extends AbstractController
     }
 
     #[Route('/boardgame/{id}', name: 'boardgame')]
-    public function show(Environment $twig, Boardgame $boardgame, CommentRepository $commentRepository): Response
+    public function show(Request $request, Environment $twig, Boardgame $boardgame, CommentRepository $commentRepository): Response
     {
+        $offset = max(0, $request->query->getInt('offset', 0));
+        $paginator = $commentRepository->getCommentPaginator($boardgame, $offset);
+
         return new Response($twig->render('boardgame/show.html.twig', [
             'boardgame' => $boardgame,
-            'comments' => $commentRepository->findBy(['boardgame' => $boardgame], ['createdAt' => 'DESC']),
+            'comments' => $paginator,
+            'previous' => $offset - CommentRepository::PAGINATOR_PER_PAGE,
+            'next' => min(count($paginator), $offset + CommentRepository::PAGINATOR_PER_PAGE),
         ]));
     }
 }
