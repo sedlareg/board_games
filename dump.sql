@@ -16,6 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `admin`
+--
+
+DROP TABLE IF EXISTS `admin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `admin` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `username` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `roles` json NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `UNIQ_880E0D76F85E0677` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `admin`
+--
+
+LOCK TABLES `admin` WRITE;
+/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+INSERT INTO `admin` VALUES (1,'admin','[\"ROLE_ADMIN\"]','$2y$13$kztV7.vN0cyerEid5TPAzOmnyUdvjLSuZYXSnEUEZOzrdJTOy2qJG');
+/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `boardgame`
 --
 
@@ -63,7 +90,7 @@ CREATE TABLE `comment` (
   PRIMARY KEY (`id`),
   KEY `IDX_9474526CB1A27A21` (`boardgame_id`),
   CONSTRAINT `FK_9474526CB1A27A21` FOREIGN KEY (`boardgame_id`) REFERENCES `boardgame` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +99,7 @@ CREATE TABLE `comment` (
 
 LOCK TABLES `comment` WRITE;
 /*!40000 ALTER TABLE `comment` DISABLE KEYS */;
-INSERT INTO `comment` VALUES (1,2,'Geraldes','geraldes@mooneye.de','Awesome','2023-08-03 17:34:43',NULL,10),(2,2,'Marc','geraldes@mooneye.de','Di best','2023-08-03 17:34:53',NULL,10),(3,2,'Kim','geraldes@mooneye.de','Boring','2023-08-03 17:35:03',NULL,1),(4,2,'Enrique','geraldes@mooneye.de','Solid','2023-08-03 17:35:12',NULL,6),(5,2,'Julia','geraldes@mooneye.de','I love it','2023-08-03 17:35:32',NULL,8),(6,3,'Geraldes','geraldes@mooneye.de','My favorite game','2023-08-03 17:54:27',NULL,10),(7,3,'Marc','geraldes@mooneye.de','I love it','2023-08-03 17:54:43',NULL,10);
+INSERT INTO `comment` VALUES (1,2,'Geraldes','geraldes@mooneye.de','Awesome','2023-08-03 17:34:43',NULL,10),(2,2,'Marc','geraldes@mooneye.de','Di best','2023-08-03 17:34:53',NULL,10),(3,2,'Kim','geraldes@mooneye.de','Boring','2023-08-03 17:35:03',NULL,1),(4,2,'Enrique','geraldes@mooneye.de','Solid','2023-08-03 17:35:12',NULL,6),(5,2,'Julia','geraldes@mooneye.de','I love it','2023-08-03 17:35:32',NULL,8),(6,3,'Geraldes','geraldes@mooneye.de','My favorite game','2023-08-03 17:54:27',NULL,10),(7,3,'Marc','geraldes@mooneye.de','I love it','2023-08-03 17:54:43',NULL,10),(11,2,'Geraldes','geraldes@mooneye.de','Wow','2023-08-03 18:25:24','2fc9cd850f6c.webp',8);
 /*!40000 ALTER TABLE `comment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -97,7 +124,7 @@ CREATE TABLE `doctrine_migration_versions` (
 
 LOCK TABLES `doctrine_migration_versions` WRITE;
 /*!40000 ALTER TABLE `doctrine_migration_versions` DISABLE KEYS */;
-INSERT INTO `doctrine_migration_versions` VALUES ('DoctrineMigrations\\Version20230803121825','2023-08-03 17:15:27',238),('DoctrineMigrations\\Version20230803124440','2023-08-03 17:15:28',27),('DoctrineMigrations\\Version20230803131505','2023-08-03 17:15:28',47),('DoctrineMigrations\\Version20230803134100','2023-08-03 17:15:28',22),('DoctrineMigrations\\Version20230803134906','2023-08-03 17:15:28',26);
+INSERT INTO `doctrine_migration_versions` VALUES ('DoctrineMigrations\\Version20230803121825','2023-08-03 17:15:27',238),('DoctrineMigrations\\Version20230803124440','2023-08-03 17:15:28',27),('DoctrineMigrations\\Version20230803131505','2023-08-03 17:15:28',47),('DoctrineMigrations\\Version20230803134100','2023-08-03 17:15:28',22),('DoctrineMigrations\\Version20230803134906','2023-08-03 17:15:28',26),('DoctrineMigrations\\Version20230803163441','2023-08-03 18:37:33',47);
 /*!40000 ALTER TABLE `doctrine_migration_versions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -155,7 +182,7 @@ CREATE TABLE `sessions` (
 
 LOCK TABLES `sessions` WRITE;
 /*!40000 ALTER TABLE `sessions` DISABLE KEYS */;
-INSERT INTO `sessions` VALUES ('pecoh1iiq37rcvf38jt8gfgm3l',_binary '_sf2_attributes|a:6:{s:15:\"_csrf/Boardgame\";s:43:\"MEFXfh-_pX1FsSLJiQNHFbAaS8irC97ho7qEB4LFIYE\";s:15:\"_csrf/ea-toggle\";s:43:\"d0PyAz8TgkBVhOhGuu-K5LXC2JVk3uECOOxty1htLuo\";s:33:\"_csrf/ea-batch-action-batchDelete\";s:43:\"Ys5kJfvxACB36fGnIPup_ReaYcq9A9r2Zoz5ABdz_0w\";s:15:\"_csrf/ea-delete\";s:43:\"CPvr-sGV4Vb6Zilw4eV1HRUfMrmvaPdTyK4PoxvkBLw\";s:13:\"_csrf/Comment\";s:43:\"Pmv_AhCYHLma4yTdeAYpQ0HMVkPOc9N-dfYRKUPLxos\";s:13:\"_csrf/comment\";s:43:\"nBfhOWF0YwelKr5OxrLvTppmY3l5I8-EC2tsx2A-qfc\";}_sf2_meta|a:3:{s:1:\"u\";i:1691078100;s:1:\"c\";i:1691075733;s:1:\"l\";i:0;}',1691079541,1691078101);
+INSERT INTO `sessions` VALUES ('82q37eqr8hjqvh7t8g31mkfb89',_binary '_sf2_attributes|a:10:{s:15:\"_csrf/Boardgame\";s:43:\"MEFXfh-_pX1FsSLJiQNHFbAaS8irC97ho7qEB4LFIYE\";s:15:\"_csrf/ea-toggle\";s:43:\"d0PyAz8TgkBVhOhGuu-K5LXC2JVk3uECOOxty1htLuo\";s:33:\"_csrf/ea-batch-action-batchDelete\";s:43:\"Ys5kJfvxACB36fGnIPup_ReaYcq9A9r2Zoz5ABdz_0w\";s:15:\"_csrf/ea-delete\";s:43:\"CPvr-sGV4Vb6Zilw4eV1HRUfMrmvaPdTyK4PoxvkBLw\";s:13:\"_csrf/Comment\";s:43:\"Pmv_AhCYHLma4yTdeAYpQ0HMVkPOc9N-dfYRKUPLxos\";s:13:\"_csrf/comment\";s:43:\"nBfhOWF0YwelKr5OxrLvTppmY3l5I8-EC2tsx2A-qfc\";s:26:\"_security.main.target_path\";s:113:\"http://127.0.0.1:40699/admin?crudAction=index&crudControllerFqcn=App%5CController%5CAdmin%5CCommentCrudController\";s:18:\"_csrf/authenticate\";s:43:\"9LzELdgWOU3OJtQ9WtALT4gkBl_KAxpbktOzE_Tib20\";s:23:\"_security.last_username\";s:5:\"admin\";s:14:\"_security_main\";s:459:\"O:75:\"Symfony\\Component\\Security\\Http\\Authenticator\\Token\\PostAuthenticationToken\":2:{i:0;s:4:\"main\";i:1;a:5:{i:0;O:16:\"App\\Entity\\Admin\":4:{s:20:\"\0App\\Entity\\Admin\0id\";i:1;s:26:\"\0App\\Entity\\Admin\0username\";s:5:\"admin\";s:23:\"\0App\\Entity\\Admin\0roles\";a:1:{i:0;s:10:\"ROLE_ADMIN\";}s:26:\"\0App\\Entity\\Admin\0password\";s:60:\"$2y$13$kztV7.vN0cyerEid5TPAzOmnyUdvjLSuZYXSnEUEZOzrdJTOy2qJG\";}i:1;b:1;i:2;N;i:3;a:0:{}i:4;a:2:{i:0;s:10:\"ROLE_ADMIN\";i:1;s:9:\"ROLE_USER\";}}}\";}_sf2_meta|a:3:{s:1:\"u\";i:1691081292;s:1:\"c\";i:1691081292;s:1:\"l\";i:0;}',1691082732,1691081292);
 /*!40000 ALTER TABLE `sessions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -168,4 +195,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-08-03 17:56:14
+-- Dump completed on 2023-08-03 18:53:10
