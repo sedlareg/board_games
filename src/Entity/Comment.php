@@ -41,6 +41,7 @@ class Comment
 
     #[ORM\Column(type: Types::SMALLINT)]
     #[Assert\NotBlank()]
+    #[Assert\Range(notInRangeMessage: "You must rate between {{ min }} and {{ max }}.", min: 1, max: 10)]
     private ?int $rating = null;
 
     public function __toString(): string
