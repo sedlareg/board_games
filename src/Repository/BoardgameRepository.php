@@ -11,7 +11,6 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method Boardgame|null find($id, $lockMode = null, $lockVersion = null)
  * @method Boardgame|null findOneBy(array $criteria, array $orderBy = null)
- * @method Boardgame[]    findAll()
  * @method Boardgame[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class BoardgameRepository extends ServiceEntityRepository
@@ -19,6 +18,11 @@ class BoardgameRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Boardgame::class);
+    }
+
+    public function findAll(): array
+    {
+        return $this->findBy([], ['year' => 'ASC','title' => 'ASC',]);
     }
 
     public function save(Boardgame $entity, bool $flush = false): void
