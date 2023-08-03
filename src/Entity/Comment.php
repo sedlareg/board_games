@@ -33,11 +33,14 @@ class Comment
     #[ORM\JoinColumn(nullable: false)]
     private ?Boardgame $boardgame = null;
 
+    #[ORM\Column(type: Types::SMALLINT)]
+    private ?int $rating = null;
+
     public function __toString(): string
     {
         return (string) $this->getEmail();
     }
-    
+
     public function getId(): ?int
     {
         return $this->id;
@@ -111,6 +114,18 @@ class Comment
     public function setBoardgame(?Boardgame $boardgame): self
     {
         $this->boardgame = $boardgame;
+
+        return $this;
+    }
+
+    public function getRating(): ?int
+    {
+        return $this->rating;
+    }
+
+    public function setRating(int $rating): self
+    {
+        $this->rating = $rating;
 
         return $this;
     }
