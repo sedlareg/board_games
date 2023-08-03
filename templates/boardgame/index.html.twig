@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}
 
 {% block title %}Hello BoardgameController!{% endblock %}
 
@@ -17,4 +17,24 @@
         <li>Your template at <code><a href="{{ '/home/gpereira/projects/board_games/templates/boardgame/index.html.twig'|file_link(0) }}">templates/boardgame/index.html.twig</a></code></li>
     </ul>
 </div>
+{% endblock %}#}
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Boardgame Ratings{% endblock %}
+
+{% block body %}
+    <h2>Give your feedback!</h2>
+
+    {% for boardgame in boardgames %}
+        <h4>{{ boardgame }}</h4>
+        <p>
+            {#  schlecht => manuelle Anpassung bei Änderung #}
+            {# <a href="/boardgame/{{ boardgame.id }}">View</a>#}
+            {#  besser => Über den Alias/Namen der Route #}
+            <a href="{{ path('boardgame', { id: boardgame.id }) }}">Rate</a>
+        </p>
+
+    {% endfor %}
 {% endblock %}

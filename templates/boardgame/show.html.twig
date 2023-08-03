@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+{% block title %}Boardgame Ranking - {{ boardgame }}{% endblock %}
+{% block body %}
+    <h2>{{ boardgame }} Boardgame</h2>
+    {% if comments|length > 0 %}
+        <div>There are {{ comments|length }} comments.</div>
+        {% for comment in comments %}
+            <h4>{{ comment.author }}</h4>
+            <p>{{ comment.rating }}</p>
+            <small>
+                {{ comment.createdAt|format_datetime('medium', 'short') }}
+            </small>
+            <p>{{ comment.text }}</p>
+            <hr />
+        {% endfor %}
+    {% else %}
+        <div>No comments have been posted yet for this boardgame.</div>
+    {% endif %}
+{% endblock %}
