@@ -46,13 +46,13 @@ class Boardgame
         return $this->getTitle().' '.$this->getYear();
     }
 
-    public function computeSlug(SluggerInterface $slugger)
+    public function computeSlug(SluggerInterface $slugger): void
     {
-        if (!$this->slug || '-' === $this->slug) {
+        if (!$this->slug || $this->slug === '-') {
             $this->slug = (string) $slugger->slug((string) $this)->lower();
         }
     }
-    
+
     public function getId(): ?int
     {
         return $this->id;

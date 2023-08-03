@@ -18,7 +18,8 @@
             <h1><a href="{{ path('homepage') }}">Boardgame Ranking</a></h1>
             <ul>
                 {% for boardgame in boardgames %}
-                    <li><a href="{{ path('boardgame', { id: boardgame.id }) }}">{{ boardgame }}</a></li>
+                    {#<li><a href="{{ path('boardgame', { id: boardgame.id }) }}">{{ boardgame }}</a></li>#}
+                    <li><a href="{{ path('boardgame', { slug: boardgame.slug }) }}">{{ boardgame }}</a></li>
                 {% endfor %}
             </ul>
             <hr/>

@@ -33,7 +33,8 @@
             {#  schlecht => manuelle Anpassung bei Änderung #}
             {# <a href="/boardgame/{{ boardgame.id }}">View</a>#}
             {#  besser => Über den Alias/Namen der Route #}
-            <a href="{{ path('boardgame', { id: boardgame.id }) }}">Rate</a>
+            {#<a href="{{ path('boardgame', { id: boardgame.id }) }}">Rate</a>#}
+            <a href="{{ path('boardgame', { slug: boardgame.slug }) }}">Rate</a>
         </p>
 
     {% endfor %}

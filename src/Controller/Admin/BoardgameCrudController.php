@@ -45,7 +45,16 @@ class BoardgameCrudController extends AbstractCrudController
         yield TextField::new('title');
         yield TextField::new('author');
         yield IntegerField::new('year');
-        yield BooleanField::new('is_sdj');
-        //yield TextField::new('slug');
+        yield BooleanField::new('sdj');
+        yield TextField::new('slug');
+    }
+
+    public function createEntity(string $entityFqcn): Boardgame
+    {
+        /** @var Boardgame $entity */
+        $entity = parent::createEntity($entityFqcn);
+        $entity->setSlug('-');
+
+        return $entity;
     }
 }

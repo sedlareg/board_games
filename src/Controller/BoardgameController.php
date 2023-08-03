@@ -23,7 +23,8 @@ class BoardgameController extends AbstractController
         ]);
     }
 
-    #[Route('/boardgame/{id}', name: 'boardgame')]
+    //#[Route('/boardgame/{id}', name: 'boardgame')]
+    #[Route('/boardgame/{slug}', name: 'boardgame')]
     public function show(Request $request, Boardgame $boardgame, CommentRepository $commentRepository): Response
     {
         $offset = max(0, $request->query->getInt('offset', 0));

@@ -14,10 +14,12 @@
             <hr />
         {% endfor %}
         {% if previous >= 0 %}
-            <a href="{{ path('boardgame', { id: boardgame.id, offset: previous }) }}">Previous</a>
+            {#<a href="{{ path('boardgame', { id: boardgame.id, offset: previous }) }}">Previous</a>#}
+            <a href="{{ path('boardgame', { slug: boardgame.slug, offset: previous }) }}">Previous</a>
         {% endif %}
         {% if next < comments|length %}
-            <a href="{{ path('boardgame', { id: boardgame.id, offset: next }) }}">Next</a>
+            {#<a href="{{ path('boardgame', { id: boardgame.id, offset: next }) }}">Next</a>#}
+            <a href="{{ path('boardgame', { id: boardgame.slug, offset: next }) }}">Next</a>
         {% endif %}
     {% else %}
         <div>No comments have been posted yet for this boardgame.</div>
