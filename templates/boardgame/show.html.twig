@@ -4,6 +4,7 @@
     <h2>{{ boardgame }} Boardgame</h2>
     {% if comments|length > 0 %}
         <div>There are {{ comments|length }} comments.</div>
+        <hr />
         {% for comment in comments %}
             <h4>{{ comment.author }}</h4>
             <p>{{ comment.rating }}</p>
@@ -19,9 +20,12 @@
         {% endif %}
         {% if next < comments|length %}
             {#<a href="{{ path('boardgame', { id: boardgame.id, offset: next }) }}">Next</a>#}
-            <a href="{{ path('boardgame', { id: boardgame.slug, offset: next }) }}">Next</a>
+            <a href="{{ path('boardgame', { slug: boardgame.slug, offset: next }) }}">Next</a>
         {% endif %}
     {% else %}
         <div>No comments have been posted yet for this boardgame.</div>
     {% endif %}
+    <hr />
+    <h2>Add your own feedback</h2>
+    {{ form(comment_form) }}
 {% endblock %}

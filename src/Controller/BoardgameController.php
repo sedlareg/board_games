@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Boardgame;
+use App\Entity\Comment;
+use App\Form\CommentType;
 use App\Repository\BoardgameRepository;
 use App\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,6 +29,9 @@ class BoardgameController extends AbstractController
     #[Route('/boardgame/{slug}', name: 'boardgame')]
     public function show(Request $request, Boardgame $boardgame, CommentRepository $commentRepository): Response
     {
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+
         $offset = max(0, $request->query->getInt('offset', 0));
         $paginator = $commentRepository->getCommentPaginator($boardgame, $offset);
 
@@ -35,6 +40,7 @@ class BoardgameController extends AbstractController
             'comments' => $paginator,
             'previous' => $offset - CommentRepository::PAGINATOR_PER_PAGE,
             'next' => min(count($paginator), $offset + CommentRepository::PAGINATOR_PER_PAGE),
+            'comment_form' => $form,
         ]);
     }
 }
