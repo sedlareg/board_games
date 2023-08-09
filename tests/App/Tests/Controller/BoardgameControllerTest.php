@@ -15,6 +15,22 @@ class BoardgameControllerTest extends WebTestCase
         $this->assertSelectorTextContains('h2', 'Give your feedback');
     }
 
+    public function testCommentSubmission()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/boardgame/blood-rage-2015');
+        $client->submitForm('Submit', [
+            'comment[author]' => 'Geraldes',
+            'comment[text]' => 'Some feedback from an automated functional test',
+            'comment[email]' => 'robot_me@automat.ed',
+            'comment[rating]' => 5,
+            'comment[photo]' => dirname(__DIR__, 2).'/public/images/under-construction.gif',
+        ]);
+        $this->assertResponseRedirects();
+        $client->followRedirect();
+        $this->assertSelectorExists('div:contains("There are 2 comments")');
+    }
+
     public function testBoardgamePage()
     {
         $client = static::createClient();
