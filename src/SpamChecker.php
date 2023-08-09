@@ -11,11 +11,11 @@ class SpamChecker
     private $endpoint;
 
     public function __construct(
-        private HttpClientInterface              $client,
-        #[Autowire('%env(AKISMET_KEY)%')] string $akismetKey,
+        private HttpClientInterface $client,
+        #[Autowire('%env(AKISMET_KEY)%')] private string $akismetKey,
     )
     {
-        $this->endpoint = sprintf('https://%s.rest.akismet.com/1.1/comment-check', $akismetKey);
+        $this->endpoint = 'https://rest.akismet.com/1.1/comment-check';
     }
 
     /**
@@ -26,6 +26,7 @@ class SpamChecker
     public function getSpamScore(Comment $comment, array $context): int
     {
         $body = array_merge($context, [
+            'api_key' => $this->akismetKey,
             'blog' => 'https://geraldespf.wordpress.com/',
             'comment_type' => 'comment',
             'comment_author' => $comment->getAuthor(),
@@ -45,6 +46,7 @@ class SpamChecker
         }
 
         $content = $response->getContent();
+
         if (isset($headers['x-akismet-debug-help'][0])) {
             throw new \RuntimeException(sprintf('Unable to check for spam: %s (%s).', $content, $headers['x-akismet-debug-help'][0]));
         }

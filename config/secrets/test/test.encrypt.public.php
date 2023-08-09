@@ -1,0 +1,3 @@
+<?php // test.encrypt.public on Wed, 09 Aug 2023 09:39:03 +0200
+
+return "I\xA6a\xC24\xE5Ac\x7F2\x883\xE4\x28h\xE6\xC1\xC7\x94KH\xA9\x96O\xA7EP\x83\xB4\x949\x0F";

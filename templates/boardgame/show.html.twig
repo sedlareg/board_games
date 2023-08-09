@@ -1,7 +1,13 @@
 {% extends 'base.html.twig' %}
 {% block title %}Boardgame Ranking - {{ boardgame }}{% endblock %}
 {% block body %}
-    <h2>{{ boardgame }} Boardgame</h2>
+    <h2>{{ boardgame }}</h2>
+    <div>
+        <p>Title: {{ boardgame.title }}</p>
+        <p>Author: {{ boardgame.author }}</p>
+        <p>Year: {{ boardgame.year }}</p>
+        <p>Game of the Year: <span>{% if boardgame.sdj %}+{% else %}-{%  endif %}</span></p>
+    </div>
     {% if comments|length > 0 %}
         <div>There are {{ comments|length }} comments.</div>
         <hr />
