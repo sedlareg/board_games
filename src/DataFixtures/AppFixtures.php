@@ -45,7 +45,16 @@ class AppFixtures extends Fixture
         $comment1->setEmail('geraldes@mooneye.de');
         $comment1->setText('This is a fantastic boardgame.');
         $comment1->setRating(10);
+        $comment1->setState('published');
         $manager->persist($comment1);
+
+        $comment2 = new Comment();
+        $comment2->setBoardgame($bloodRage);
+        $comment2->setAuthor('Lucas');
+        $comment2->setEmail('lucas@example.com');
+        $comment2->setText('I think this one is going to be moderated.');
+        $comment2->setRating(7);
+        $manager->persist($comment2);
 
         $admin = new Admin();
         $admin->setRoles(['ROLE_ADMIN']);

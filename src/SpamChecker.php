@@ -25,6 +25,7 @@ class SpamChecker
      */
     public function getSpamScore(Comment $comment, array $context): int
     {
+        error_log('Eintrag in die MessageQueue');
         $body = array_merge($context, [
             'api_key' => $this->akismetKey,
             'blog' => 'https://geraldespf.wordpress.com/',

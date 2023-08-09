@@ -56,6 +56,7 @@ class CommentCrudController extends AbstractCrudController
             ->setLabel('Photo')
             ->onlyOnIndex();
         yield IntegerField::new('rating');
+        yield TextField::new('state');
         $createdAt = DateTimeField::new('createdAt')->setFormTypeOptions([
             'years' => range(date('Y'),
                 date('Y') + 5),
